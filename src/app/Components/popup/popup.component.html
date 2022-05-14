@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>Add New Product</h1>
+<div mat-dialog-content>
+
+    <form [formGroup]="productForm">
+
+
+
+    <mat-form-field appearance="outline">
+        <mat-label>Product Name</mat-label>
+        <input formControlName ="productName" matInput placeholder="Name">
+      </mat-form-field>
+
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input formControlName ="price"  matInput type="number" placeholder="Price">
+      </mat-form-field>
+  
+     
+      <mat-form-field appearance="outline">
+        <mat-label>Quantity</mat-label>
+        <input formControlName ="productQuantity"  matInput type="number" placeholder="Quantity">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Select Category</mat-label>
+
+        <mat-select formControlName ="category"  id="CatSel" title="category"
+
+        [(ngModel)]="selectedCategory" placeholder="Category">
+
+            <mat-option  *ngFor="let cat of categoryList" [value]="cat.id">{{cat.name}}</mat-option>
+
+           
+
+          </mat-select>
+
+      </mat-form-field>
+    </form>
+
+
+     
+    <div class="row" style="margin-bottom:15px;">
+      <div class="col-md-3 w-100">
+        <input type="file"  #file placeholder="Choose file" (change)="uploadFile(file?.files,file.value)" style="display:none;">
+        <button type="button" class="btn btn-light " (click)="file.click()">Upload Image</button>
+      </div>
+      <div class="col-md-4">
+        <span class="upload" *ngIf="progress > 0">
+          {{progress}}%
+        </span>
+        <span class="upload" *ngIf="message">
+          {{message}}
+        </span>
+      </div>
+    </div>
+</div>
+
+<div mat-dialog-action [align] = "'end'">
+  <button mat-raised-button class="btn btn-danger" mat-dialog-close>Close</button>
+  <button style="margin-left :8px;" mat-raised-button class="btn btn-success" (click)="addProduct()" >Add</button>
+
+</div>

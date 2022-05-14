@@ -1,0 +1,25 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Login</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div class="page__content-data position-absolute text-center">
+       
+        <form class="page__content shadow p-3 position-relative" [formGroup]="LoginForm" >
+            <div class="mb-3">
+              <label for="exampleInputUserName" class="form-label">User Name</label>
+              <input type="text" class="form-control" id="exampleInputUserName"  formControlName="UserName">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" formControlName="Password">
+            </div>
+           
+            <button type="submit" class="btn btn-success">Login</button>
+          </form>
+        
+           
+      </div>
+    </div>
+  </div>
+   
+
+   

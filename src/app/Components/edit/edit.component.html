@@ -1,0 +1,48 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Edit Product</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div class="page__content-data position-absolute text-center">
+
+        <div *ngIf="alert" class="alert alert-success alert-dismissable fade show" role="alert">
+            <strong>Success !</strong> Product Data Updated Successfully!
+            
+            </div>
+            
+            <form [formGroup]="EditProduct" (ngSubmit)="Edit()">
+                <div class="mb-3" >
+                  <label for="pName" class="form-label">Name</label>
+                  <input type="text" formControlName="Name" 
+                    class="form-control" name="pName" id="PName" placeholder="">
+                 </div>
+                <div class="mb-3">
+                  <label for="pPrice" class="form-label">Price</label>
+                  <input type="number" formControlName="Price"
+                    class="form-control" name="pPrice" id="pPrice" placeholder="" >
+                </div>
+                <div class="mb-3">
+                  <label for="pQuant" class="form-label">Quantity</label>
+                  <input type="number" formControlName="Quantity"
+                    class="form-control" name="pQuant" id="pQuant" placeholder="" >
+                </div>
+                <div class="mb-3">
+                  <label for="CatSel" class="form-label">Select Category</label>
+                  <select class="form-control" [(ngModel)]="selectedCatID" formControlName="Category"
+                    name="cat" id="CatSel" title="catgory" required>
+                    <option *ngFor="let cat of CategoryList" [value]="cat.id">{{cat.name}}</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="pImg" class="form-label">Product Image</label>
+                  <input type="file"
+                    class="form-control" name="pImg" id="pImg" placeholder=""  formControlName="Image">
+                  <small id="helpId" class="form-text text-muted"></small>
+                </div>
+                <button type="submit" class="btn btn-success" >Submit</button>
+              </form>
+    </div>
+    </div>
+  </div>
+
+
+
+
