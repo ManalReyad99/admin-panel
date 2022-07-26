@@ -9,14 +9,13 @@ import { map } from 'rxjs/operators';
 })
 export class ProductService {
   private httpOptions;
-  constructor(private httpClient:HttpClient) {
-
-    this.httpOptions={ headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-     
-    })
+  constructor(private httpClient: HttpClient) {
+    this.httpOptions={
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
   }
-   }
 
   GetAllProducts():Observable<IProduct[]>
   {
@@ -50,15 +49,39 @@ export class ProductService {
    
   }
 
-  AddNewProduct(newProduct:IProduct):Observable<IProduct>
-  {
-  
- return this.httpClient.post<IProduct>(`${environment.BaseAPIURL}/Product`, JSON.stringify(newProduct));
+//   AddNewProduct(newProduct:any):Observable<any>
+//   {
+//     console.log("================================");
 
-  }
-  EditProduct(ProductId:number, newProduct:IProduct):Observable<IProduct>
+//     console.log(newProduct);
+//  return this.httpClient.post<any>(`${environment.BaseAPIURL}/Product`, JSON.stringify(newProduct), {
+//   headers: new HttpHeaders({
+//     'Content-Type': 'application/json'
+//   })
+
+// });
+// console.log("================================");
+// console.log(newProduct);
+//   }
+
+
+AddNewProduct(newProduct:IProduct):Observable<IProduct>
+{ 
+return this.httpClient.post<IProduct>(`${environment.BaseAPIURL}/Product`,JSON.stringify(newProduct),{
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })});
+
+}
+  EditProduct(ProductId: number, newProduct: IProduct) :Observable<IProduct>
+
   {
-   return this.httpClient.put<IProduct>(`${environment.BaseAPIURL}/Product/${ProductId}`,JSON.stringify(newProduct));
+
+    return this.httpClient.put<IProduct>(`${environment.BaseAPIURL}/Product/${ProductId}`,JSON.stringify(newProduct),{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
 
   }
   

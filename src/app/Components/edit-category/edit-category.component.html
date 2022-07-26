@@ -1,0 +1,27 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Edit Category</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="py-1 mt-1">
+
+            <div *ngIf="alert" class="alert alert-success alert-dismissable fade show" role="alert">
+                <strong>Success !</strong> Category Data Updated Successfully!
+
+            </div>
+
+            <form [formGroup]="EditCategory" (ngSubmit)="editCategory()">
+                <div class="mb-3">
+                    <label for="pName" class="form-label">Name</label>
+                    <input type="text" formControlName="name" class="form-control" name="pName" id="PName"
+                        placeholder="" required
+                        [class.is-invalid]="EditCategory.get('name')?.invalid && EditCategory.get('name')?.touched ">
+                        <small class="text-danger"
+                        [class.d-none]="EditCategory.get('name')?.valid || EditCategory.get('name')?.untouched">
+                        Last  Name is required</small>
+                </div>
+               
+
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

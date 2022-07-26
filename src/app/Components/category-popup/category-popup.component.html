@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Add New Category</h1>
+<div *ngIf="alert" class="alert alert-success alert-dismissable fade show" role="alert">
+    <strong>Success !</strong> Category Data Added Successfully!
+    
+    </div>
+<div mat-dialog-content>
+
+  <form [formGroup]="categoryForm">
+
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category Name</mat-label>
+      <input formControlName="categoryName" matInput placeholder="Name"
+      [class.is-invalid]="categoryForm.get('categoryName')?.invalid && categoryForm.get('categoryName')?.touched "/>
+      
+      
+    </mat-form-field>
+    <small class="text-danger" [class.d-none]="categoryForm.get('categoryName')?.valid || categoryForm.get('categoryName')?.untouched">
+      Name is required</small>
+  </form>
+
+<div mat-dialog-action [align]="'end'">
+  <button mat-raised-button class="btn btn-danger" mat-dialog-close>Close</button>
+  <button style="margin-left :8px;" mat-raised-button class="btn btn-success" (click)="addCategory()">Add</button>
+
+</div>

@@ -1,0 +1,47 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Categories</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="py-1 mt-1">
+
+            <a name="" id="" class="btn btn-primary m-2" role="button" (click)="openDialog()">Add Category</a>
+
+            <br>
+            <div class="header_fixed ">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category No.</th>
+                            <th>Name</th>
+                            
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of CategoryList; let i=index;">
+                                <td>{{i+1}}</td>
+                                <td>{{item.name}}</td>
+                            
+                                <td>
+                                    <button type="button" class="btn btn-secondary m-2 "
+                                        routerLink="/editCategory/{{item.id}}"><i class="fa fa-edit"
+                                            style="font-size: 25px;"></i> </button>
+                                    <button type="button" class="btn btn-secondary m-2 " role="button"
+                                        (click)="Delete(item.id)">
+                                        <mat-icon>delete_sweep</mat-icon>
+                                    </button>
+
+                                </td>
+                           
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components//header/header.component';
 import { HomeComponent } from './Components//home/home.component';
-import { DashboardComponent } from './Components//dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidenavComponent } from './Components/sidenav/sidenav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -20,7 +19,6 @@ import { ReportsComponent } from './Components/reports/reports.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParentLayoutComponent } from './Components/parent-layout/parent-layout.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
-import { AdminsComponent } from './Components/admins/admins.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PopupComponent } from './Components/popup/popup.component';
 import { MatDialogModule} from '@angular/material/dialog'
@@ -29,12 +27,19 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { EditComponent } from './Components/edit/edit.component';
+import { CategoriesComponent } from './Components/categories/categories.component';
+import { CategoryPopupComponent } from './Components/category-popup/category-popup.component';
+import { SuccessActionComponent } from './Components/success-action/success-action.component';
+import { EditCategoryComponent } from './Components/edit-category/edit-category.component';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    DashboardComponent,
     SidenavComponent,
     LoginComponent,
     RegisterComponent,
@@ -42,9 +47,12 @@ import { EditComponent } from './Components/edit/edit.component';
     ReportsComponent,
     ParentLayoutComponent,
     PageNotFoundComponent,
-    AdminsComponent,
     PopupComponent,
     EditComponent,
+    CategoriesComponent,
+    CategoryPopupComponent,
+    SuccessActionComponent,
+    EditCategoryComponent,
   ],
   imports: [
     BrowserModule,

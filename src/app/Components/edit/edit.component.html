@@ -1,47 +1,90 @@
 <div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Edit Product</div>
-    <div class="page__content shadow p-3 position-relative">
-      <div class="page__content-data position-absolute text-center">
+  <div class="d-flex page__box p-3 mt-2">Edit Product</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="py-1 mt-1">
 
-        <div *ngIf="alert" class="alert alert-success alert-dismissable fade show" role="alert">
-            <strong>Success !</strong> Product Data Updated Successfully!
-            
-            </div>
-            
-            <form [formGroup]="EditProduct" (ngSubmit)="Edit()">
-                <div class="mb-3" >
-                  <label for="pName" class="form-label">Name</label>
-                  <input type="text" formControlName="Name" 
-                    class="form-control" name="pName" id="PName" placeholder="">
-                 </div>
-                <div class="mb-3">
-                  <label for="pPrice" class="form-label">Price</label>
-                  <input type="number" formControlName="Price"
-                    class="form-control" name="pPrice" id="pPrice" placeholder="" >
+      <div *ngIf="alert" class="alert alert-success alert-dismissable fade show" role="alert">
+          <strong>Success !</strong> Product Data Updated Successfully!
+          
+          </div>
+          
+          <form [formGroup]="EditProduct" (ngSubmit)="Edit()">
+              <div class="mb-3">
+                <label for="pName" class="form-label">Name</label>
+                <input type="text" formControlName="name" 
+                  class="form-control" name="pName" id="PName" placeholder="" required
+                  [class.is-invalid]="EditProduct.get('name')?.invalid && EditProduct.get('name')?.touched "/>
+                  <small class="text-danger"
+                  [class.d-none]="EditProduct.get('name')?.valid || EditProduct.get('name')?.untouched">
+                   Name is required</small>
+               </div>
+
+               <div class="mb-3">
+                <label for="pDescription" class="form-label">Description</label>
+                <input type="text" formControlName="description" 
+                  class="form-control" name="pDescription" id="pDescription" placeholder="" required
+                  [class.is-invalid]="EditProduct.get('description')?.invalid && EditProduct.get('description')?.touched ">
+                  <small class="text-danger"
+                  [class.d-none]="EditProduct.get('description')?.valid || EditProduct.get('description')?.untouched">
+                  Description is required</small>
+               </div>
+
+
+
+              <div class="mb-3">
+                <label for="pPrice" class="form-label">Price</label>
+                <input type="number" formControlName="price"
+                  class="form-control" name="pPrice" id="pPrice" placeholder=""required
+                  [class.is-invalid]="EditProduct.get('price')?.invalid && EditProduct.get('price')?.touched " >
+                  <small class="text-danger"
+                  [class.d-none]="EditProduct.get('price')?.valid || EditProduct.get('price')?.untouched">
+                  price is required</small>
+              </div>
+
+              <div class="mb-3">
+                <label for="pQuant" class="form-label">Quantity</label>
+                <input type="number" formControlName="quantity"
+                  class="form-control" name="pQuant" id="pQuant" placeholder=""
+                  [class.is-invalid]="EditProduct.get('quantity')?.invalid && EditProduct.get('quantity')?.touched " >
+                  <small class="text-danger"
+                  [class.d-none]="EditProduct.get('quantity')?.valid || EditProduct.get('quantity')?.untouched">
+                  quantity is required</small>
+              </div>
+              <div class="mb-3">
+                <label for="CatSel" class="form-label">Select Category</label>
+                <select class="form-control" [(ngModel)]="selectedCatID" formControlName="categoryId"
+                  name="cat" id="CatSel" title="catgory" required>
+                  <option *ngFor="let cat of CategoryList" [value]="cat.id">{{cat.name}}</option>
+                </select>
+                <small class="text-danger"
+                [class.d-none]="EditProduct.get('categoryId')?.valid || EditProduct.get('categoryId')?.untouched">
+                category is required</small>
+              </div>
+              <div class="row" style="margin-bottom:15px;">
+                <div class="col-md-3 w-100">
+                  <input type="file"  #file placeholder="Choose file" (change)="uploadFile(file?.files,file.value)" style="display:none;" required
+                  [class.is-invalid]="EditProduct.get('image')?.invalid && EditProduct.get('image')?.touched ">
+                  <small class="text-danger"
+                  [class.d-none]="EditProduct.get('image')?.valid || EditProduct.get('image')?.untouched">
+                  image is required</small>
+                  <button type="button" class="btn btn-light " (click)="file.click()">Upload Image</button>
+                 
                 </div>
-                <div class="mb-3">
-                  <label for="pQuant" class="form-label">Quantity</label>
-                  <input type="number" formControlName="Quantity"
-                    class="form-control" name="pQuant" id="pQuant" placeholder="" >
+                <div class="col-md-4">
+                  <span class="upload" *ngIf="progress > 0">
+                    {{progress}}%
+                  </span>
+                  <span class="upload" *ngIf="message">
+                    {{message}}
+                  </span>
                 </div>
-                <div class="mb-3">
-                  <label for="CatSel" class="form-label">Select Category</label>
-                  <select class="form-control" [(ngModel)]="selectedCatID" formControlName="Category"
-                    name="cat" id="CatSel" title="catgory" required>
-                    <option *ngFor="let cat of CategoryList" [value]="cat.id">{{cat.name}}</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="pImg" class="form-label">Product Image</label>
-                  <input type="file"
-                    class="form-control" name="pImg" id="pImg" placeholder=""  formControlName="Image">
-                  <small id="helpId" class="form-text text-muted"></small>
-                </div>
-                <button type="submit" class="btn btn-success" >Submit</button>
-              </form>
-    </div>
-    </div>
+              </div>
+          
+              <button type="submit" class="btn btn-success" >Submit</button>
+            </form>
   </div>
+  </div>
+</div>
 
 
 

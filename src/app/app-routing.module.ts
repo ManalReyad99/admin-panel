@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminsComponent } from './Components/admins/admins.component';
-import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { CategoriesComponent } from './Components/categories/categories.component';
+import { EditCategoryComponent } from './Components/edit-category/edit-category.component';
 import { EditComponent } from './Components/edit/edit.component';
 import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
@@ -18,11 +18,11 @@ const routes: Routes = [
   {path: '', component:ParentLayoutComponent, children: [
     {path:'', redirectTo:'/home', pathMatch:'full'},
   { path: 'home', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'reports', component: ReportsComponent },
-  { path: 'admins', component: AdminsComponent },
-  {path:'edit/:id',component:EditComponent}
+  {path:'edit/:id',component:EditComponent},
+  {path:'categories',component:CategoriesComponent},
+  {path:'editCategory/:id',component:EditCategoryComponent}
 
 ]},
 { path: 'login', component: LoginComponent },

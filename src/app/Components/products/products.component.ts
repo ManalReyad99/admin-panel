@@ -7,6 +7,7 @@ import { ProductService } from 'src/app/Services/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { EventEmitter } from '@angular/core';
+import { SuccessActionComponent } from '../success-action/success-action.component';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -17,7 +18,6 @@ export class ProductsComponent implements OnInit,OnChanges {
   SelectedCatID:number=0;
   cardItems:ICart[]=[];
   ProductShosen!:IProduct;
-  //FilteredProducts:IProduct[]=[];
   ProductList:IProduct[]=[];
   @Output() public onUploadFinished = new EventEmitter();
 
@@ -33,15 +33,18 @@ CardItems!:ICart ;
     this.categoryService.GetAllCategories().subscribe(AllCategories=>{
       this.CategoryList=AllCategories
     })
- this.productServices.GetAllProducts().subscribe(all=>{this.ProductList=all})
+ this.productServices.GetAllProducts().subscribe(all=>{this.ProductList=all
+
+console.log(all)})
  
  
   }
   openDialog(){
     this.popupDialog.open(PopupComponent, {
-      width : '35%'
+      width : '45%'
      });
   }
+ 
 
 ngOnChanges(changes: SimpleChanges): void {
  
@@ -71,8 +74,11 @@ ngOnChanges(changes: SimpleChanges): void {
 Delete(id:number)
 {
   this.productServices.DeleteProduct(id).subscribe((result)=>{
-    console.log(result,"Producted Deleted Successfully!")
   })
+  this.popupDialog.open(SuccessActionComponent, {
+    width : '15%'
+   });
+  
 }
 
   AddProductsToCard(ShoppingCardItems:ICart)

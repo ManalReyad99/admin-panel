@@ -1,64 +1,147 @@
 <h1 mat-dialog-title>Add New Product</h1>
+
+<div *ngIf="alert" class="alert alert-success alert-dismissable fade show" role="alert">
+  <strong>Success !</strong> Product Data Added Successfully!
+  
+  </div>
 <div mat-dialog-content>
 
-    <form [formGroup]="productForm">
+  <form [formGroup]="productForm">
 
 
+<small class="text-danger"
+        [class.d-none]="productForm.get('productName')?.valid || productForm.get('productName')?.untouched">
+         Product Name is required</small>
+    <mat-form-field appearance="outline">
+      <mat-label>Product Name</mat-label>
+      <input formControlName="productName" matInput placeholder="Name"
+      [class.is-invalid]="productForm.get('productName')?.invalid && productForm.get('productName')?.touched "/>
+      
+    </mat-form-field>
+
+
+    <small class="text-danger"
+    [class.d-none]="productForm.get('description')?.valid || productForm.get('description')?.untouched">
+    Description is required</small> 
 
     <mat-form-field appearance="outline">
-        <mat-label>Product Name</mat-label>
-        <input formControlName ="productName" matInput placeholder="Name">
-      </mat-form-field>
+      <mat-label>Description</mat-label>
+      <input formControlName="description" matInput placeholder="Description"
+       [class.is-invalid]="productForm.get('description')?.invalid && productForm.get('description')?.touched "/>
+     
+    </mat-form-field>
+
+    <small class="text-danger"
+        [class.d-none]="productForm.get('price')?.valid || productForm.get('price')?.untouched">
+        price is required</small>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input formControlName="price" matInput type="number" placeholder="Price"
+       [class.is-invalid]="productForm.get('price')?.invalid && productForm.get('price')?.touched "/>
+     
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+
+      <mat-label>Has Discount ?</mat-label>
+
+
+      <small class="text-danger"
+          [class.d-none]="productForm.get('hasDiscount')?.valid || productForm.get('hasDiscount')?.untouched">
+           required</small>
+      <mat-select formControlName="hasDiscount" id="CatSel" title="hasDiscount"
+        placeholder="Has Discount ?" (selectionChange)="HasDiscount()">
+        <mat-option [value]="true">true</mat-option>
+        <mat-option [value]="false">false</mat-option>
+        
+      </mat-select>
+
+    </mat-form-field>
+
+    <small class="text-danger"
+    [class.d-none]="productForm.get('priceAfterDiscount')?.valid || productForm.get('priceAfterDiscount')?.untouched">
+     required</small>
+    <ng-container *ngIf="ProductDiscount != true">
+     
+<mat-form-field appearance="outline">
+      <mat-label>Price After Discount</mat-label>
+      <input formControlName="priceAfterDiscount" matInput type="number" placeholder="Price After Discount"
+      [class.is-invalid]="productForm.get('priceAfterDiscount')?.invalid && productForm.get('priceAfterDiscount')?.touched "/>
 
       
-      <mat-form-field appearance="outline">
-        <mat-label>Price</mat-label>
-        <input formControlName ="price"  matInput type="number" placeholder="Price">
+    </mat-form-field>
+  </ng-container>
+   
+  <small class="text-danger"
+        [class.d-none]="productForm.get('productQuantity')?.valid || productForm.get('productQuantity')?.untouched">
+         required</small>
+    <mat-form-field appearance="outline">
+      <mat-label>Quantity</mat-label>
+      <input formControlName="productQuantity" matInput type="number" placeholder="Quantity"
+       [class.is-invalid]="productForm.get('productQuantity')?.invalid && productForm.get('productQuantity')?.touched "/>
+    
+    </mat-form-field>
+
+   
+    <div formArrayName="colors">
+      <mat-form-field appearance="outline" class="mb-3 ms-3" *ngFor="let item of colors.controls let i=index">
+        <mat-label for="{{'color'+ i+1}}">Color No.# {{i+1}}</mat-label>
+        <input [formControlName]="i" matInput placeholder="Color"/>
+       
       </mat-form-field>
-  
-     
-      <mat-form-field appearance="outline">
-        <mat-label>Quantity</mat-label>
-        <input formControlName ="productQuantity"  matInput type="number" placeholder="Quantity">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-
-        <mat-label>Select Category</mat-label>
-
-        <mat-select formControlName ="category"  id="CatSel" title="category"
-
-        [(ngModel)]="selectedCategory" placeholder="Category">
-
-            <mat-option  *ngFor="let cat of categoryList" [value]="cat.id">{{cat.name}}</mat-option>
-
-           
-
-          </mat-select>
-
-      </mat-form-field>
-    </form>
-
-
-     
-    <div class="row" style="margin-bottom:15px;">
-      <div class="col-md-3 w-100">
-        <input type="file"  #file placeholder="Choose file" (change)="uploadFile(file?.files,file.value)" style="display:none;">
-        <button type="button" class="btn btn-light " (click)="file.click()">Upload Image</button>
-      </div>
-      <div class="col-md-4">
-        <span class="upload" *ngIf="progress > 0">
-          {{progress}}%
-        </span>
-        <span class="upload" *ngIf="message">
-          {{message}}
-        </span>
-      </div>
+      <button type="button" class="btn btn-secondary" (click)="addColor($event)">+</button>
+    
     </div>
+   
+    
+
+   
+    <div formArrayName="sizes">
+      <mat-form-field appearance="outline" class="mb-3 ms-3" *ngFor="let item of sizes.controls let i=index">
+        <mat-label for="{{'size'+ i+1}}">Size No.# {{i+1}}</mat-label>
+        <input [formControlName]="i" matInput placeholder="Size">
+      </mat-form-field>
+      <button type="button" class="btn btn-secondary" (click)="addSize($event)">+</button>
+    
+    </div>
+  
+
+  
+   
+  <mat-form-field appearance="outline">
+    <mat-label>Select Category</mat-label>
+
+    <mat-select formControlName="category" id="CatSel" title="category" [(ngModel)]="selectedCategory"
+      placeholder="Category">
+
+      <mat-option *ngFor="let cat of categoryList" [value]="cat.id">{{cat.name}}</mat-option>
+    </mat-select>
+
+  </mat-form-field>
+  
+  </form>
+
+
+
+  <div class="row" style="margin-bottom:15px;">
+    <div class="col-md-3 w-100">
+      <input type="file" #file placeholder="Choose file" (change)="uploadFile(file?.files,file.value)"
+        style="display:none;">
+      <button type="button" class="btn btn-light " (click)="file.click()">Upload Image</button>
+    </div>
+    <div class="col-md-4">
+      <span class="upload" *ngIf="progress > 0">
+        {{progress}}%
+      </span>
+      <span class="upload" *ngIf="message">
+        {{message}}
+      </span>
+    </div>
+  </div>
 </div>
 
-<div mat-dialog-action [align] = "'end'">
+<div mat-dialog-action [align]="'end'">
   <button mat-raised-button class="btn btn-danger" mat-dialog-close>Close</button>
-  <button style="margin-left :8px;" mat-raised-button class="btn btn-success" (click)="addProduct()" >Add</button>
+  <button style="margin-left :8px;" mat-raised-button class="btn btn-success" (click)="addProduct()">Add</button>
 
 </div>

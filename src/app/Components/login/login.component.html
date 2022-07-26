@@ -1,25 +1,39 @@
 <div class="container-fluid page">
     <div class="d-flex page__box p-3 mt-2">Login</div>
     <div class="page__content shadow p-3 position-relative">
-      <div class="page__content-data position-absolute text-center">
-       
-        <form class="page__content shadow p-3 position-relative" [formGroup]="LoginForm" >
-            <div class="mb-3">
-              <label for="exampleInputUserName" class="form-label">User Name</label>
-              <input type="text" class="form-control" id="exampleInputUserName"  formControlName="UserName">
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" formControlName="Password">
-            </div>
-           
-            <button type="submit" class="btn btn-success">Login</button>
-          </form>
-        
-           
-      </div>
-    </div>
-  </div>
-   
+        <div class="py-1 mt-1">
+            <div class="login_container">
+                <div class="image_container">
+                    <img src='https://drive.google.com/uc?export=view&id=1iyKZ5h_2nzBz_lGkMKFtj_d7teT6jADO ' />
+                </div>
+                <div class="login_form_container">
+                 <form  [formGroup]="Login" >
+                    <div class="container">
+                        <h3>Login</h3>
+                        
+                        <div class="input_container">
+                            <input type="text" placeholder="username"   [class.is-invalid]="Login.get('username')?.invalid && Login.get('username')?.touched "/>
+                            <small class="text-danger" [class.d-none]="Login.get('username')?.valid || Login.get('username')?.untouched">Frist
+                                Nameis required</small>
 
-   
+                            <i class="fas fa-envelope"></i>
+                            <div class="border_animation"></div>
+                        </div>
+                        <div class="input_container">
+                            <input type="password" placeholder="Password" [class.is-invalid]="Login.get('Password')?.invalid && Login.get('Password')?.touched "/>
+                            <small class="text-danger" [class.d-none]="Login.get('Password')?.valid || Login.get('Password')?.untouched">Password
+                                 is required</small>
+
+                            <i class="fas fa-lock"></i>
+                            <div class="border_animation"></div>
+                        </div>
+                        <button>Login</button>
+                        <!-- <div class="create_new_account"> create new Account ? <a routerLink="/register">Sign Up</a> -->
+                        <!-- </div> -->
+                    </div>
+                 </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
